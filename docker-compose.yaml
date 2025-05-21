@@ -1,0 +1,27 @@
+services:
+  mongodb:
+    image: mongo:7.0.12
+    container_name: mongodb
+    ports:
+      - "8817:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin202x@
+    volumes:
+      - mongodb_data:/data/db
+
+  redis-server:
+    image: redis:8.0-alpine
+    container_name: redis-cache
+    ports:
+      - "6372:6379"
+    restart: unless-stopped
+    environment:
+      REDIS_PASSWORD: Admin202a
+    command: ["redis-server", "--requirepass", "Admin202a"]
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mongodb_data:
+  redis_data:
